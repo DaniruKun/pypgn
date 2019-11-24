@@ -1,6 +1,6 @@
 import re
 
-from typing import Mapping
+from typing import Mapping, List
 
 
 def _get_pgn_list(path: str) -> list:
@@ -20,16 +20,30 @@ def _get_tags(pgn: list) -> Mapping:
     return tag_dict
 
 
+def _get_movetext(pgn: list) -> List[List]:
+    for line in pgn:
+        if re.search(r'^1\. ', line):
+            movetext: str = line
+
+    movetext_items = movetext.split(" ")
+    movetext_list = []
+    for i, item in enumerate(movetext_items):
+        if re.search(r'\d\.', item):
+            movetext_list.append([movetext_items[i],
+                                 movetext_items[i + 1],
+                                 movetext_items[i + 2]])
+
+    return movetext_list
+
+
 class Game:
     def __init__(self, file_path):
         self.pgn: list = _get_pgn_list(file_path)
         self.tags: Mapping = _get_tags(self.pgn)
+        self.movetext: List[List] = _get_movetext(self.pgn)
 
-    def get_tag(self, name: str):
-        pass
-
-    def get_movetext(self):
-        pass
+    def get_tag_value(self, name: str) -> str:
+        return self.tags[name]
 
     def get_move(self):
         pass
@@ -39,4 +53,4 @@ class Game:
 
 
 game = Game('test.pgn')
-game.get_tags()
+print(game.movetext)
