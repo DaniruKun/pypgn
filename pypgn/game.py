@@ -20,37 +20,36 @@ def _get_tags(pgn: list) -> Mapping:
     return tag_dict
 
 
-def _get_movetext(pgn: list) -> List[List]:
+def _get_moves(pgn: list) -> List[List]:
     for line in pgn:
         if re.search(r'^1\. ', line):
             movetext: str = line
 
     movetext_items = movetext.split(" ")
-    movetext_list = []
+    moves = []
     for i, item in enumerate(movetext_items):
         if re.search(r'\d\.', item):
-            movetext_list.append([movetext_items[i],
+            moves.append([movetext_items[i],
                                  movetext_items[i + 1],
                                  movetext_items[i + 2]])
 
-    return movetext_list
+    return moves
 
 
 class Game:
     def __init__(self, file_path):
         self.pgn: list = _get_pgn_list(file_path)
         self.tags: Mapping = _get_tags(self.pgn)
-        self.movetext: List[List] = _get_movetext(self.pgn)
+        self.moves: List[List] = _get_moves(self.pgn)
 
     def get_tag_value(self, name: str) -> str:
         return self.tags[name]
 
-    def get_move(self):
+    def get_move(self, index: int, player: str = None):
         pass
 
-    def get_move_count(self):
-        pass
+    def get_move_count(self) -> int:
+        return len(self.moves)
 
 
 game = Game('test.pgn')
-print(game.movetext)
