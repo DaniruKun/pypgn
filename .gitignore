@@ -102,3 +102,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/pypgn.iml
+.idea/vcs.xml
+pypgn/test.pgn
