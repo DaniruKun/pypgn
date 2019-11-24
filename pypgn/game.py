@@ -1,6 +1,7 @@
 import re
+from typing import Mapping, List, Union, NewType
 
-from typing import Mapping, List
+Move = NewType('Move', Union[str, List])
 
 
 def _get_pgn_list(path: str) -> list:
@@ -20,7 +21,7 @@ def _get_tags(pgn: list) -> Mapping:
     return tag_dict
 
 
-def _get_moves(pgn: list) -> List[List]:
+def _get_moves(pgn: list) -> List[Move]:
     for line in pgn:
         if re.search(r'^1\. ', line):
             movetext: str = line
@@ -29,9 +30,10 @@ def _get_moves(pgn: list) -> List[List]:
     moves = []
     for i, item in enumerate(movetext_items):
         if re.search(r'\d\.', item):
-            moves.append([movetext_items[i],
-                                 movetext_items[i + 1],
-                                 movetext_items[i + 2]])
+            move = [movetext_items[i],
+                    movetext_items[i + 1],
+                    movetext_items[i + 2]]
+            moves.append(move)
 
     return moves
 
@@ -45,11 +47,15 @@ class Game:
     def get_tag_value(self, name: str) -> str:
         return self.tags[name]
 
-    def get_move(self, index: int, player: str = None):
-        pass
+    def get_move(self, index: int, player: str = None) -> Move:
+        if player is None:
+            return self.moves[index - 1]
+        else:
+            return self.moves[index - 1][1 if 'w' in player.lower() else 2]
 
     def get_move_count(self) -> int:
         return len(self.moves)
 
 
 game = Game('test.pgn')
+print(game.get_move(1))
