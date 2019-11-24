@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='pypgn',
-    version='0.1',
+    version='0.2',
     packages=['pypgn'],
     url='https://github.com/DaniruKun/pypgn',
     license='MPL-2.0',
@@ -14,7 +14,7 @@ setup(
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
-        'Topic :: Software Development :: Build Tools',
+        'Topic :: Text Processing',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
