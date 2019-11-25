@@ -1,8 +1,16 @@
 from setuptools import setup
 
+# read the contents of your README file
+from os import path
+this_directory = path.abspath(path.dirname(__file__))
+with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
+
 setup(
     name='pypgn',
-    version='0.2',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
+    version='0.2.1',
     packages=['pypgn'],
     url='https://github.com/DaniruKun/pypgn',
     license='MPL-2.0',

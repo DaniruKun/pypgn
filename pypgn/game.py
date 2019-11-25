@@ -4,6 +4,8 @@ from typing import Mapping, List, Union, NewType
 Move = NewType('Move', Union[str, List])
 
 
+# TODO Move helper functions to game_util.py
+
 def _get_pgn_list(path: str) -> list:
     with open(file=path, mode='r') as f:
         lines = f.read().splitlines()
@@ -38,6 +40,9 @@ def _get_moves(pgn: list) -> List[Move]:
     return moves
 
 
+# TODO Add doc strings to all public methods
+
+
 class Game:
     def __init__(self, file_path):
         self.pgn: list = _get_pgn_list(file_path)
@@ -47,11 +52,11 @@ class Game:
     def get_tag_value(self, name: str) -> str:
         return self.tags[name]
 
-    def get_move(self, index: int, player: str = None) -> Move:
-        if player is None:
-            return self.moves[index - 1]
-        else:
-            return self.moves[index - 1][1 if 'w' in player.lower() else 2]
+    def get_move(self, index: int) -> Move:
+        return self.moves[index - 1]
+
+    def get_ply(self, index: int, player: str) -> str:
+        return self.moves[index - 1][1 if 'w' in player.lower() else 2]
 
     def get_move_count(self) -> int:
         return len(self.moves)
