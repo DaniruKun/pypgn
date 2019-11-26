@@ -70,6 +70,12 @@ class Game:
         Returns a ply for a given move for a given player
     get_move_count()
         Returns the total move count for the given game
+    get_result()
+        Returns the result of the game
+    get_date()
+        Returns the date of the played game
+    get_move_range(start: int, end: int)
+        Returns a list of moves from given start to end index
     """
     def __init__(self, file_path: str):
         """
@@ -132,7 +138,7 @@ class Game:
         :type index: int
         :param player: Player color (white or black)
         :type player: str
-        :return: Ply
+        :return: Ply of player of given color
         :rtype: str
         """
         return self.moves[index - 1][1 if 'w' in player.lower() else 2]
@@ -144,3 +150,27 @@ class Game:
         :rtype: int
         """
         return len(self.moves)
+
+    def get_result(self) -> str:
+        """Gets and returns the game result
+
+        :return: Result of the game
+        :rtype: str
+        """
+        return self.get_tag_value('Result')
+
+    def get_date(self) -> str:
+        """Gets and returns the date of the game
+
+        :return: Date of the game in format YYYY.MM.DD
+        """
+        return self.get_tag_value('Date')
+
+    def get_move_range(self, start: int, end: int) -> List[Move]:
+        """Gets and returns a range of moves
+
+        :param start: Start index of moves to get
+        :param end: End index of moves to get
+        :return: List of moves in given range
+        """
+        return self.moves[start:end]
