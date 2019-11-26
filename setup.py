@@ -17,7 +17,6 @@ setup(
     author_email='thedanpetrov@gmail.com',
     keywords=['pgn', 'chess', 'game', 'notation'],
     description='Library for parsing and manipulating PGN format files.',
-    download_url='https://github.com/DaniruKun/pypgn/archive/0.1.tar.gz',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
