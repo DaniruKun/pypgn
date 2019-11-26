@@ -33,7 +33,7 @@ from pypgn.game import Game
 chess_game = Game('test.pgn')
 
 print(chess_game.get_tag_value('Event'))
-print(chess_game.get_tag_value('Result'))
+print(chess_game.get_result())
 # Print opening ply for white
 print(chess_game.get_ply(1, 'w'))
 ```
@@ -44,3 +44,10 @@ Output:
 >> 0-1
 >> e4
 ```
+
+## Authors
+
+[@DaniruKun](https://github.com/DaniruKun) aka Daniils Petrovs
+
+## License
+[Mozilla Public License 2.0](https://opensource.org/licenses/MPL-2.0) see [LICENSE](LICENSE) for more details.
