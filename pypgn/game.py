@@ -1,43 +1,6 @@
-import re
-from typing import Mapping, List, Union, NewType
-
-Move = NewType('Move', Union[str, List])
-
-
-# TODO Move helper functions to game_util.py
-
-def _get_pgn_list(path: str) -> list:
-    with open(file=path, mode='r') as f:
-        lines = f.read().splitlines()
-        return lines
-
-
-def _get_tags(pgn: list) -> Mapping:
-    tag_list = [tag for tag in pgn if re.search(r'^\[', tag)]
-    tag_dict: dict = {}
-    for tag in tag_list:
-        key = tag.split(" ", 1)[0][1:]
-        val = tag.split(" ", 1)[1][1:-2]
-        tag_dict[key] = val
-
-    return tag_dict
-
-
-def _get_moves(pgn: list) -> List[Move]:
-    for line in pgn:
-        if re.search(r'^1\. ', line):
-            movetext: str = line
-
-    movetext_items = movetext.split(" ")
-    moves = []
-    for i, item in enumerate(movetext_items):
-        if re.search(r'\d\.', item):
-            move = [movetext_items[i],
-                    movetext_items[i + 1],
-                    movetext_items[i + 2]]
-            moves.append(move)
-
-    return moves
+from typing import Mapping, List
+from pypgn.game_utils import (
+    _get_tags, _get_pgn_list, _get_moves, Move)
 
 
 class Game:
@@ -70,6 +33,12 @@ class Game:
         Returns a ply for a given move for a given player
     get_move_count()
         Returns the total move count for the given game
+    get_result()
+        Returns the result of the game
+    get_date()
+        Returns the date of the played game
+    get_move_range(start: int, end: int)
+        Returns a list of moves from given start to end index
     """
     def __init__(self, file_path: str):
         """
@@ -132,7 +101,7 @@ class Game:
         :type index: int
         :param player: Player color (white or black)
         :type player: str
-        :return: Ply
+        :return: Ply of player of given color
         :rtype: str
         """
         return self.moves[index - 1][1 if 'w' in player.lower() else 2]
@@ -144,3 +113,27 @@ class Game:
         :rtype: int
         """
         return len(self.moves)
+
+    def get_result(self) -> str:
+        """Gets and returns the game result
+
+        :return: Result of the game
+        :rtype: str
+        """
+        return self.get_tag_value('Result')
+
+    def get_date(self) -> str:
+        """Gets and returns the date of the game
+
+        :return: Date of the game in format YYYY.MM.DD
+        """
+        return self.get_tag_value('Date')
+
+    def get_move_range(self, start: int, end: int) -> List[Move]:
+        """Gets and returns a range of moves
+
+        :param start: Start index of moves to get
+        :param end: End index of moves to get
+        :return: List of moves in given range
+        """
+        return self.moves[start:end]
