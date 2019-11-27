@@ -47,6 +47,8 @@ $ e4
 ```
 
 ## Contributing
+
+### Local setup
 Setup a virtual environment with `virtualenv`
 ```shell script
 $ virtualenv venv
@@ -68,6 +70,13 @@ Run `flake8` lint with
 $ make lint
 ```
 
+### Docker
+
+You can also build and run tests in a Docker container:
+```shell script
+$ make docker-build
+$ make docker-run
+```
 ## Authors
 
 [@DaniruKun](https://github.com/DaniruKun) aka Daniils Petrovs

@@ -1,4 +1,4 @@
-.PHONY: clean-pyc clean-build clean-test docs clean test lint help
+.PHONY: clean-pyc clean-build clean-test docs clean test docker-build docker-test lint help
 
 help:
 	@echo "clean - remove all build, test, coverage and Python artifacts"
@@ -7,7 +7,9 @@ help:
 	@echo "clean-test - remove test and coverage artifacts"
 	@echo "lint - check style with flake8"
 	@echo "test - run tests quickly with the default Python"
-	@echo "test-all - run tests on every Python version with tox"
+	@echo "docker-build - build a Docker container with the library"
+	@echo "docker-test - run unit tests in built Docker container"
+	@echo "test-all - run tests on everything"
 	@echo "release - package and upload a release"
 	@echo "dist - package"
 	@echo "install - install the package to the active Python's site-packages"
@@ -40,6 +42,12 @@ test:
 
 test-all:
 	test
+
+docker-build:
+	docker build -t pypgn .
+
+docker-test:
+	docker run -it --rm pypgn
 
 release: clean
 	python setup.py sdist upload
