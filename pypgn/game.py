@@ -27,7 +27,7 @@ class Game:
         Returns a map of tags of the PGN file
     get_moves()
         Returns a list of moves of the movetext
-    get_tag_value(name: str)
+    get_tag(name: str)
         Returns a value for a given key in the parsed PGN tags
     get_move(index: int)
         Returns a move list for a given move number
@@ -61,15 +61,7 @@ class Game:
         """
         return self.pgn
 
-    def get_tags(self) -> dict:
-        """Gets and returns a map of metadata tags of the PGN
-
-        :return: Map of PGN tags
-        :rtype: dict
-        """
-        return self.tags
-
-    def get_tag_value(self, name: str) -> str:
+    def get_tag(self, name: str) -> str:
         """Gets and returns a tag for a given key name
 
         :param name: Key name
@@ -78,6 +70,14 @@ class Game:
         :rtype: str
         """
         return self.tags[name]
+
+    def get_tags(self) -> dict:
+        """Gets and returns a map of metadata tags of the PGN
+
+        :return: Map of PGN tags
+        :rtype: dict
+        """
+        return self.tags
 
     def get_move(self, index: int) -> Move:
         """Gets and returns a move of a certain number
@@ -123,14 +123,14 @@ class Game:
         :return: Result of the game
         :rtype: str
         """
-        return self.get_tag_value('Result')
+        return self.get_tag('Result')
 
     def get_date(self) -> str:
         """Gets and returns the date of the game
 
         :return: Date of the game in format YYYY.MM.DD
         """
-        return self.get_tag_value('Date')
+        return self.get_tag('Date')
 
     def get_move_range(self, start: int, end: int) -> List[Move]:
         """Gets and returns a range of moves

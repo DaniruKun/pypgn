@@ -19,9 +19,9 @@ class TestGame:
         assert type(game_obj.get_tags()) == dict
 
     def test_get_tag_value(self, game_obj):
-        assert game_obj.get_tag_value('Event') == "Rated Blitz game"
-        assert game_obj.get_tag_value('Site') == "https://lichess.org/#"
-        assert game_obj.get_tag_value('UTCDate') == "2019.11.06"
+        assert game_obj.get_tag('Event') == "Rated Blitz game"
+        assert game_obj.get_tag('Site') == "https://lichess.org/#"
+        assert game_obj.get_tag('UTCDate') == "2019.11.06"
 
     def test_get_move(self, game_obj):
         assert game_obj.get_move(4) == ["4.", "d4", "Nc6"]
@@ -42,10 +42,10 @@ class TestGame:
         assert game_obj.get_move_count() == len(game_obj.get_moves())
 
     def test_get_result(self, game_obj):
-        assert game_obj.get_result() == game_obj.get_tag_value('Result')
+        assert game_obj.get_result() == game_obj.get_tag('Result')
 
     def test_get_date(self, game_obj):
-        assert game_obj.get_date() == game_obj.get_tag_value('UTCDate')
+        assert game_obj.get_date() == game_obj.get_tag('UTCDate')
 
     def test_get_move_range(self, game_obj):
         assert game_obj.get_move_range(1, 28) == game_obj.get_moves()
