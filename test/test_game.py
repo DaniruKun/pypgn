@@ -36,7 +36,7 @@ class TestGame:
             move = game_obj.get_move(i)
             assert move[1] == game_obj.get_ply(i, 'w') \
                    and move[2] == game_obj.get_ply(i, 'b'), \
-                f"Non-matching ply pair at move {i} !"
+                "Non-matching ply pair at move %s !" % str(i)
 
     def test_get_move_count(self, game_obj):
         assert game_obj.get_move_count() == len(game_obj.get_moves())
