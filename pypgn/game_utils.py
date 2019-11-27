@@ -1,5 +1,5 @@
 import re
-from typing import Mapping, List, NewType, Union
+from typing import List, NewType, Union
 
 Move = NewType('Move', Union[str, List])
 
@@ -10,7 +10,7 @@ def _get_pgn_list(path: str) -> list:
         return lines
 
 
-def _get_tags(pgn: list) -> Mapping:
+def _get_tags(pgn: list) -> dict:
     tag_list = [tag for tag in pgn if re.search(r'^\[', tag)]
     tag_dict: dict = {}
     for tag in tag_list:

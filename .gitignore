@@ -107,4 +107,9 @@ venv.bak/
 .idea/modules.xml
 .idea/pypgn.iml
 .idea/vcs.xml
-pypgn/test.pgn
+.idea/.gitignore
+.idea/dictionaries/
+docs/make.bat
+docs/source/_static/
+docs/source/_templates/
+target
