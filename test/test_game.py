@@ -19,10 +19,14 @@ class TestGame:
     def test_get_tags(self, game_pgn):
         assert type(game_pgn.get_tags()) == dict
 
-    def test_get_tag_value(self, game_pgn):
+    def test_get_tag(self, game_pgn):
         assert game_pgn.get_tag('Event') == "Rated Blitz game"
         assert game_pgn.get_tag('Site') == "https://lichess.org/#"
         assert game_pgn.get_tag('UTCDate') == "2019.11.06"
+
+    def test_get_non_existing_tag(self, game_pgn):
+        with pytest.raises(KeyError):
+            game_pgn.get_tag('SomeTag')
 
     def test_get_move(self, game_pgn):
         assert game_pgn.get_move(4) == ["4.", "d4", "Nc6"]
@@ -35,8 +39,7 @@ class TestGame:
     def test_get_ply(self, game_pgn):
         for i in range(1, game_pgn.get_move_count()):
             move = game_pgn.get_move(i)
-            assert move[1] == game_pgn.get_ply(i, 'w') \
-                   and move[2] == game_pgn.get_ply(i, 'b'), \
+            assert move[1] == game_pgn.get_ply(i, 'w') and move[2] == game_pgn.get_ply(i, 'b'), \
                 "Non-matching ply pair at move %s !" % str(i)
 
     def test_get_move_count(self, game_pgn):

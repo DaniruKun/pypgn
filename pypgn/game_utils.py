@@ -29,6 +29,7 @@ def _get_tags(pgn: list) -> dict:
 
 
 def _get_moves(pgn: list) -> List[Move]:
+    movetext = ''
     for line in pgn:
         if re.search(r'^1\. ', line):
             movetext: str = line
