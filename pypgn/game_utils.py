@@ -57,7 +57,7 @@ def _get_lichess_pgn_lines(src: str) -> list:
     else:
         game_id = src
 
-    conn.request("GET", endpoint + game_id, payload)
+    conn.request("GET", endpoint + game_id + "?evals=0&clocks=0", payload)
 
     res = conn.getresponse()
     data = res.read()
