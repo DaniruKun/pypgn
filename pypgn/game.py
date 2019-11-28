@@ -19,37 +19,15 @@ class Game:
                               [1] - white ply,
                               [2] - black ply
 
-    Methods
-    -------
-    get_pgn_list()
-        Returns a list of lines of the PGN file
-    get_tags()
-        Returns a map of tags of the PGN file
-    get_moves()
-        Returns a list of moves of the movetext
-    get_tag(name: str)
-        Returns a value for a given key in the parsed PGN tags
-    get_move(index: int)
-        Returns a move list for a given move number
-    get_ply(index: int, player: str)
-        Returns a ply for a given move for a given player
-    get_move_count()
-        Returns the total move count for the given game
-    get_result()
-        Returns the result of the game
-    get_date()
-        Returns the date of the played game
-    get_move_range(start: int, end: int)
-        Returns a list of moves from given start to end index
     """
 
-    def __init__(self, file_path: str):
+    def __init__(self, path: str = None):
         """
 
-        :param file_path: path to pgn file
-        :type file_path: str
+        :param path: path to pgn file or Lichess game ID or
+        :type path: str
         """
-        self.pgn: list = _get_pgn_list(file_path)
+        self.pgn: list = _get_pgn_list(path)
         self.tags: dict = _get_tags(self.pgn)
         self.moves: List[Move] = _get_moves(self.pgn)
 

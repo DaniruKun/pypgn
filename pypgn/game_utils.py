@@ -1,13 +1,20 @@
 import re
+import http.client
 from typing import List, NewType, Union
 
 Move = NewType('Move', Union[str, List])
 
+PGN_REGEX = r'(?i)(\.pgn)$'
+URL_REGEX = r'(\/\/)|(http)'
+
 
 def _get_pgn_list(path: str) -> list:
-    with open(file=path, mode='r') as f:
-        lines = f.read().splitlines()
-        return lines
+    if re.search(PGN_REGEX, path):
+        with open(file=path, mode='r') as f:
+            lines = f.read().splitlines()
+            return lines
+    else:
+        return _get_lichess_pgn_lines(path)
 
 
 def _get_tags(pgn: list) -> dict:
@@ -36,3 +43,23 @@ def _get_moves(pgn: list) -> List[Move]:
             moves.append(move)
 
     return moves
+
+
+def _get_lichess_pgn_lines(src: str) -> list:
+    conn = http.client.HTTPSConnection("lichess.org")
+
+    payload = ""
+    endpoint = "/game/export/"
+
+    if re.search(URL_REGEX, src):
+        tmp = re.split(r'org/', src)
+        game_id = tmp[-1]
+    else:
+        game_id = src
+
+    conn.request("GET", endpoint + game_id + "?evals=0&clocks=0", payload)
+
+    res = conn.getresponse()
+    data = res.read()
+
+    return data.decode("utf-8").splitlines()
