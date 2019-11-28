@@ -24,12 +24,22 @@ class Game:
     def __init__(self, path: str = None):
         """
 
-        :param path: path to pgn file or Lichess game ID or
+        :param path: path to pgn file or Lichess game ID
         :type path: str
         """
-        self.pgn: list = _get_pgn_list(path)
+        if path is not None:
+            self.pgn: list = _get_pgn_list(path)
+        else:
+            self.pgn = None
         self.tags: dict = _get_tags(self.pgn)
         self.moves: List[Move] = _get_moves(self.pgn)
+
+    def open_pgn(self, path: str) -> None:
+        """Sets the pgn attribute
+
+        :param path: path to pgn file or Lichess game ID
+        """
+        self.pgn = _get_pgn_list(path)
 
     def get_pgn_list(self) -> list:
         """Gets and returns a list of lines of the PGN
@@ -47,7 +57,10 @@ class Game:
         :return: Value of a tag
         :rtype: str
         """
-        return self.tags[name]
+        if name in self.tags:
+            return self.tags[name]
+        else:
+            raise KeyError(f"This tag does not exist: {name}")
 
     def get_tags(self) -> dict:
         """Gets and returns a map of metadata tags of the PGN
@@ -108,13 +121,13 @@ class Game:
 
         :return: Date of the game in format YYYY.MM.DD
         """
-        return self.get_tag('Date')
+        return self.get_tag('Date' if 'Date' in self.tags else 'UTCDate')
 
-    def get_move_range(self, start: int, end: int) -> List[Move]:
+    def get_move_range(self, start: int = 1, end: int = None) -> List[Move]:
         """Gets and returns a range of moves
 
         :param start: Start index of moves to get
         :param end: End index of moves to get
         :return: List of moves in given range
         """
-        return self.moves[start - 1:end]
+        return self.moves[start - 1:(end if end is not None else -1)]
