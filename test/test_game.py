@@ -2,6 +2,7 @@ import pytest
 import os
 from pypgn.game import Game
 from pathlib import Path
+import time
 
 
 @pytest.fixture(scope="module")
@@ -52,8 +53,10 @@ class TestGame:
 
     def test_init_from_lichess_id(self):
         game_lichess = Game('dGm3ND39')
+        time.sleep(1)
         assert game_lichess.get_move_count() == 18
 
     def test_init_from_lichess_url(self):
         game_lichess = Game('https://lichess.org/dGm3ND39')
+        time.sleep(1)
         assert game_lichess.get_move_count() == 18
