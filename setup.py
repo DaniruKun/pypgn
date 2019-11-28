@@ -9,7 +9,7 @@ setup(
     name='pypgn',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    version='0.3.9',
+    version='0.4.0',
     packages=['pypgn'],
     url='https://github.com/DaniruKun/pypgn',
     license='MPL-2.0',
