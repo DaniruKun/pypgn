@@ -100,6 +100,13 @@ class Game:
         """
         return len(self.moves)
 
+    def event(self) -> str:
+        """Returns the name of the event if such exists
+
+        :return: Event name
+        """
+        return self.tag('Event' if 'Event' in self.tags else '')
+
     def result(self) -> str:
         """Gets and returns the game result
 

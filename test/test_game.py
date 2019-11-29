@@ -22,8 +22,9 @@ class TestGame:
         assert game_pgn.tag('UTCDate') == "2019.11.06"
 
     def test_get_non_existing_tag(self, game_pgn):
-        with pytest.raises(KeyError):
-            game_pgn.tag('SomeTag')
+        tag = 'SomeTag'
+        with pytest.raises(KeyError, match=fr'{tag}'):
+            game_pgn.tag(tag)
 
     def test_get_move(self, game_pgn):
         assert game_pgn.move(4) == ["4.", "d4", "Nc6"]
