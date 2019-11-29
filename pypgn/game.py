@@ -34,14 +34,14 @@ class Game:
         self.tags: dict = _get_tags(self.pgn)
         self.moves: List[Move] = _get_moves(self.pgn)
 
-    def open_pgn(self, path: str) -> None:
+    def pgn(self, path: str) -> None:
         """Sets the pgn attribute
 
         :param path: path to pgn file or Lichess game ID
         """
         self.pgn = _get_pgn_list(path)
 
-    def get_pgn_list(self) -> list:
+    def pgn_list(self) -> list:
         """Gets and returns a list of lines of the PGN
 
         :return: a list of lines of the parsed PGN
@@ -49,7 +49,7 @@ class Game:
         """
         return self.pgn
 
-    def get_tag(self, name: str) -> str:
+    def tag(self, name: str) -> str:
         """Gets and returns a tag for a given key name
 
         :param name: Key name
@@ -62,7 +62,7 @@ class Game:
         else:
             raise KeyError(f"This tag does not exist: {name}")
 
-    def get_tags(self) -> dict:
+    def tags(self) -> dict:
         """Gets and returns a map of metadata tags of the PGN
 
         :return: Map of PGN tags
@@ -70,7 +70,7 @@ class Game:
         """
         return self.tags
 
-    def get_move(self, index: int) -> Move:
+    def move(self, index: int) -> Move:
         """Gets and returns a move of a certain number
 
         :param index: Move number
@@ -80,15 +80,7 @@ class Game:
         """
         return self.moves[index - 1]
 
-    def get_moves(self) -> List[Move]:
-        """Gets and returns a list of moves
-
-        :return: A list of Moves
-        :rtype: List[Move]
-        """
-        return self.moves
-
-    def get_ply(self, index: int, player: str) -> str:
+    def ply(self, index: int, player: str) -> str:
         """Gets and returns a ply for a given move
 
         :param index: Move number
@@ -100,7 +92,7 @@ class Game:
         """
         return self.moves[index - 1][1 if 'w' in player.lower() else 2]
 
-    def get_move_count(self) -> int:
+    def move_count(self) -> int:
         """Gets and returns the total number of moves in the game
 
         :return: Total number of moves
@@ -108,22 +100,22 @@ class Game:
         """
         return len(self.moves)
 
-    def get_result(self) -> str:
+    def result(self) -> str:
         """Gets and returns the game result
 
         :return: Result of the game
         :rtype: str
         """
-        return self.get_tag('Result')
+        return self.tag('Result')
 
-    def get_date(self) -> str:
+    def date(self) -> str:
         """Gets and returns the date of the game
 
         :return: Date of the game in format YYYY.MM.DD
         """
-        return self.get_tag('Date' if 'Date' in self.tags else 'UTCDate')
+        return self.tag('Date' if 'Date' in self.tags else 'UTCDate')
 
-    def get_move_range(self, start: int = 1, end: int = None) -> List[Move]:
+    def move_range(self, start: int = 1, end: int = None) -> List[Move]:
         """Gets and returns a range of moves
 
         :param start: Start index of moves to get
