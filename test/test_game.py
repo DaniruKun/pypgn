@@ -16,9 +16,6 @@ class TestGame:
     def test_get_pgn_list(self, game_pgn):
         assert len(game_pgn.get_pgn_list()) == 20
 
-    def test_get_tags(self, game_pgn):
-        assert type(game_pgn.get_tags()) == dict
-
     def test_get_tag(self, game_pgn):
         assert game_pgn.get_tag('Event') == "Rated Blitz game"
         assert game_pgn.get_tag('Site') == "https://lichess.org/#"
