@@ -49,6 +49,10 @@ $ 0-1
 $ e4
 ```
 
+## Read the docs
+
+[Introduction](https://pypgn.readthedocs.io/en/latest/)
+
 ## Contributing
 
 ### Local setup

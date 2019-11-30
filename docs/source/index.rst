@@ -1,9 +1,10 @@
 PyPGN
 ========
 
-A pure Python 3 library to simplify parsing and manipulation of PGN http://portablegamenotation.com/FIDE.html) (Portable Game Notationformat files, which are often used for serializing games such as chess.
+A pure Python 3 library to simplify parsing and manipulation of PGN
+(http://portablegamenotation.com/FIDE.html) format files, which are often used for sharing game rounds for chess.
 
-It makes it very easy to work with PGN:
+It makes it very easy to work with PGN::
 
     from pypgn.game import Game
     # Importing game from file on disk
@@ -26,7 +27,7 @@ Features
 Installation
 ------------
 
-Install `pypgn` by running:
+Install `pypgn` by running::
 
     pip install pypgn
 
