@@ -1,6 +1,7 @@
 import re
 import http.client
 from typing import List, NewType, Union
+from http.client import HTTPException
 
 Move = NewType('Move', Union[str, List])
 
@@ -59,8 +60,12 @@ def _get_lichess_pgn_lines(src: str) -> list:
         game_id = src
 
     conn.request("GET", endpoint + game_id + "?evals=0&clocks=0", payload)
-
     res = conn.getresponse()
-    data = res.read()
 
-    return data.decode("utf-8").splitlines()
+    if res.status == 200:
+        data = res.read()
+        conn.close()
+        return data.decode("utf-8").splitlines()
+    else:
+        conn.close()
+        raise HTTPException(f'Unexpected status code! Expected: 200 Actual: {res.status}')
