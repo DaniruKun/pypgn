@@ -1,41 +1,48 @@
 PyPGN
 ========
 
-PyPGN will solve your problem of where to start with documentation,
-by providing a basic explanation of how to do it easily.
+A pure Python 3 library to simplify parsing and manipulation of PGN http://portablegamenotation.com/FIDE.html) (Portable Game Notationformat files, which are often used for serializing games such as chess.
 
-Look how easy it is to use:
+It makes it very easy to work with PGN:
 
-    import project
-    # Get your stuff done
-    project.do_stuff()
+    from pypgn.game import Game
+    # Importing game from file on disk
+    chess_game = Game('test.pgn')
+
+    # Import game from Lichess
+    chess_game.pgn('dGm3ND39')
+
+    print(chess_game.tag('Event'))
+    print(chess_game.result())
+    # Print opening ply for white
+    print(chess_game.ply(1, 'w'))
 
 Features
 --------
 
-- Be awesome
-- Make things faster
+- Import games from PGN file on disk or from Lichess
+- Get tags, moves, plys or other key parts of a game
 
 Installation
 ------------
 
-Install $project by running:
+Install `pypgn` by running:
 
-    install project
+    pip install pypgn
 
 Contribute
 ----------
 
-- Issue Tracker: github.com/$project/$project/issues
-- Source Code: github.com/$project/$project
+- Issue Tracker: https://github.com/DaniruKun/pypgn/issues
+- Source Code: https://github.com/DaniruKun/pypgn
 
 Support
 -------
 
 If you are having issues, please let us know.
-We have a mailing list located at: project@google-groups.com
+Open an issue or message me on Telegram: https://t.me/danpetrov
 
 License
 -------
 
-The project is licensed under the BSD license.
+The project is licensed under the MPL-2 license.
