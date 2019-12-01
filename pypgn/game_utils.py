@@ -1,7 +1,6 @@
 import re
-import http.client
 from typing import List, NewType, Union
-from http.client import HTTPException
+from http.client import HTTPException, HTTPSConnection
 
 Move = NewType('Move', Union[str, List])
 
@@ -48,7 +47,7 @@ def _get_moves(pgn: list) -> List[Move]:
 
 
 def _get_lichess_pgn_lines(src: str) -> list:
-    conn = http.client.HTTPSConnection("lichess.org")
+    conn = HTTPSConnection("lichess.org")
 
     payload = ""
     endpoint = "/game/export/"

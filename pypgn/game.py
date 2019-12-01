@@ -105,7 +105,7 @@ class Game:
 
         :return: Event name
         """
-        return self.tag('Event' if 'Event' in self.tags else '')
+        return self.tag('Event' if self.tags is not None and 'Event' in self.tags else '')
 
     def result(self) -> str:
         """Gets and returns the game result
@@ -120,7 +120,7 @@ class Game:
 
         :return: Date of the game in format YYYY.MM.DD
         """
-        return self.tag('Date' if 'Date' in self.tags else 'UTCDate')
+        return self.tag('Date' if self.tags is not None and 'Date' in self.tags else 'UTCDate')
 
     def move_range(self, start: int = 1, end: int = None) -> List[Move]:
         """Gets and returns a range of moves
