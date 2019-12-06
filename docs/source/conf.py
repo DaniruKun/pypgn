@@ -1,3 +1,4 @@
+from setup import VERSION, AUTHOR
 # Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
@@ -18,12 +19,11 @@
 # -- Project information -----------------------------------------------------
 
 project = 'pypgn'
-copyright = '2019, Daniils Petrovs'
-author = 'Daniils Petrovs'
+copyright = '2019, ' + AUTHOR
+author = AUTHOR
 
 # The full version, including alpha/beta/rc tags
-release = '0.5.0'
-
+release = VERSION
 
 # -- General configuration ---------------------------------------------------
 
@@ -39,7 +39,6 @@ templates_path = ['_templates']
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
-
 
 # -- Options for HTML output -------------------------------------------------
 

@@ -8,7 +8,7 @@ A pure Python 3 library to simplify parsing and manipulation of [PGN](http://por
 
 ## Prerequisites
 
-Python version `3.x` > `3.6` and `Pip`
+Python version `3.x` >= `3.6` and `PiP`
 
 ## Install
 
