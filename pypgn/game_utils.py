@@ -51,6 +51,7 @@ def _get_lichess_pgn_lines(src: str) -> list:
 
     payload = ""
     endpoint = "/game/export/"
+    params = "?evals=0&clocks=0&opening=0&literate=0"
 
     if re.search(URL_REGEX, src):
         tmp = re.split(r'org/', src)
@@ -58,7 +59,7 @@ def _get_lichess_pgn_lines(src: str) -> list:
     else:
         game_id = src
 
-    conn.request("GET", endpoint + game_id + "?evals=0&clocks=0", payload)
+    conn.request("GET", endpoint + game_id + params, payload)
     res = conn.getresponse()
 
     if res.status == 200:
